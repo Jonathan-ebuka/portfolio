@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #ece9e2;
+  --color-foreground: #0d0d0d;
+  --color-secondary: #8a877f;
+  --color-accent: #e11d2e;
+  --color-footer-bg: #0A0A0A;
+  --font-sans: "Inter", sans-serif;
+}
+
+.hide-cursor,
+.hide-cursor * {
+  cursor: none !important;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ===== Display typography ===== */
+.display {
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+/* ===== 3D chrome objects ===== */
+.scene-3d {
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+.chrome {
+  transform-style: preserve-3d;
+  background: linear-gradient(
+    150deg,
+    #2b2b30 0%,
+    #6c6c74 22%,
+    #e9e9ef 40%,
+    #44444b 55%,
+    #16161a 72%,
+    #5a5a62 100%
+  );
+  /* iridescent rim */
+  filter: drop-shadow(-6px -4px 10px rgba(124, 92, 246, 0.55))
+    drop-shadow(6px 6px 12px rgba(56, 189, 248, 0.4))
+    drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35));
+}
+
+.chrome-star {
+  clip-path: polygon(
+    50% 0%,
+    61% 39%,
+    100% 50%,
+    61% 61%,
+    50% 100%,
+    39% 61%,
+    0% 50%,
+    39% 39%
+  );
+}
+
+.chrome-bolt {
+  clip-path: polygon(
+    58% 0%,
+    20% 56%,
+    46% 56%,
+    34% 100%,
+    82% 40%,
+    52% 40%
+  );
+}
+
+/* ===== Scroll text reveal ===== */
+.reveal-text {
+  color: var(--color-secondary);
+  transition: color 120ms linear;
+}
+.reveal-word {
+  display: inline-block;
+  color: rgba(13, 13, 13, var(--w, 0.18));
+  transition: color 80ms linear;
+}
+
+/* ===== Service rows ===== */
+.service-row {
+  border-top: 1px solid rgba(13, 13, 13, 0.14);
+  transition: padding 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.service-row:last-child {
+  border-bottom: 1px solid rgba(13, 13, 13, 0.14);
+}
+.service-row:hover .service-title {
+  transform: translateX(18px);
+}
+.service-title {
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Custom cursor grow class */
+.cursor-grow {
+  transform: translate(-50%, -50%) scale(2.5) !important;
+}
+
+/* Headline typography */
+.headline {
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+/* Mono metadata */
+.mono {
+  font-family: monospace;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Reveal animation */
+@keyframes reveal-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.reveal-char {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.reveal-char span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: reveal-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Marquee */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Image hover effect */
+.project-image {
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-image:hover {
+  transform: scale(1.05);
+}
+
+/* Smooth transitions for all interactive elements */
+a, button {
+  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
